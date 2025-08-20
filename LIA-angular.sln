@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenCrossApi", "GreenCrossApi\GreenCrossApi.csproj", "{C157E6B9-59ED-2D41-4FD9-5FE11B03D3A6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C157E6B9-59ED-2D41-4FD9-5FE11B03D3A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C157E6B9-59ED-2D41-4FD9-5FE11B03D3A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C157E6B9-59ED-2D41-4FD9-5FE11B03D3A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C157E6B9-59ED-2D41-4FD9-5FE11B03D3A6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {84CA228B-A122-4388-8E80-ABC6E18ECC27}
+	EndGlobalSection
+EndGlobal

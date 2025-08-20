@@ -1,0 +1,64 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7,2.6rem);
+  grid-gap: 0.3rem;
+}
+
+.grid div {
+  width: 2.6rem;
+  height: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  text-align: center;
+}
+
+.grid div.green { background-color: green; color: white; }
+.grid div.yellow { background-color: yellow; }
+.grid div.red { background-color: red; color: white; }
+.grid div.white { background-color: white; }
+
+.grid div.inactive {
+  background-color: #f0f0f0;
+  cursor: default;
+}
+
+.popup {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  background: #fff;
+  padding: 1rem;
+  border: 1px solid #000;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.popup textarea {
+  width: 11.3rem;
+  height: 6rem;
+}
+
+#green{
+  background-color: green;
+  color: white;
+}
+
+#red{
+  background-color: red;
+  color: white;
+}
+
+#yellow{
+  background-color: yellow;
+}
+
+#white{
+  background-color: white;
+}
+
+

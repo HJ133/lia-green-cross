@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "sFB2CI1mJwsXXfn+WHrR7m7eiqj2Sjb09G1FClXs81Q=",
+  "Source": "GreenCrossApi",
+  "BasePath": "_content/GreenCrossApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

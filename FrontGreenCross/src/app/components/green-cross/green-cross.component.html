@@ -1,0 +1,29 @@
+<div class="grid">
+  <div *ngFor="let day of days; let i = index" #dayDiv [ngClass]="day.status" [class.inactive]="!day.active"
+    (click)="openPopup(day, dayDiv)">
+    {{ day.day || '' }}
+  </div>
+</div>
+
+<div *ngIf="showPopup" class="popup" [ngStyle]="{ top: popupTop + 'px', left: popupLeft + 'px' }">
+  <h3>Choose color & description</h3>
+
+  <label>
+    Colour:
+    <select [(ngModel)]="selectedColour"
+      [ngStyle]="{ 'background-color': selectedColour}">
+      <option value="green" id="green">Green</option>
+      <option value="yellow" id="yellow">Yellow</option>
+      <option value="red" id="red">Red</option>
+      <option value="white" id="white">Default</option>
+    </select>
+  </label>
+
+  <label>
+    Description:
+    <textarea [(ngModel)]="descriptionText" placeholder="Description"></textarea>
+  </label>
+
+  <button (click)="saveDay()">Save</button>
+  <button (click)="closePopup()">Cancel</button>
+</div>
