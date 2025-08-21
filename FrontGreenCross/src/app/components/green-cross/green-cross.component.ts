@@ -25,7 +25,7 @@ interface ClickEvent {
 })
 export class GreenCrossComponent {
 
-  private apiUrl = 'http://localhost:5037/api/clickevents';
+  private apiUrl = '/api/clickevents';
 
   days: Day[] = [];
 
