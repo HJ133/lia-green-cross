@@ -1,64 +1,298 @@
-.grid {
-  display: grid;
-  grid-template-columns: repeat(7,2.6rem);
-  grid-gap: 0.3rem;
+.green-cross-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+
+  .calendar-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 16px 64px rgba(0, 0, 0, 0.15);
+    }
+
+    mat-card-header {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      padding: 24px;
+
+      mat-card-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 24px;
+        font-weight: 600;
+        color: #2c3e50;
+
+        .calendar-icon {
+          color: #4CAF50;
+          font-size: 28px;
+        }
+      }
+
+      mat-card-subtitle {
+        color: #6c757d;
+        margin-top: 8px;
+        font-size: 14px;
+      }
+    }
+
+    mat-card-content {
+      padding: 32px;
+    }
+  }
 }
 
-.grid div {
-  width: 2.6rem;
-  height: 2.6rem;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  max-width: 500px;
+  margin: 0 auto;
+
+  div {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+    font-size: 16px;
+    background: white;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    &.green { 
+      background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+      color: white;
+      
+      &:hover {
+        background: linear-gradient(135deg, #43A047 0%, #5CB860 100%);
+      }
+    }
+
+    &.yellow { 
+      background: linear-gradient(135deg, #FFC107 0%, #FFD54F 100%);
+      color: #333;
+      
+      &:hover {
+        background: linear-gradient(135deg, #FFB300 0%, #FFCA28 100%);
+      }
+    }
+
+    &.red { 
+      background: linear-gradient(135deg, #F44336 0%, #EF5350 100%);
+      color: white;
+      
+      &:hover {
+        background: linear-gradient(135deg, #E53935 0%, #EF5350 100%);
+      }
+    }
+
+    &.white { 
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+      color: #333;
+      border: 2px solid #e9ecef;
+      
+      &:hover {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-color: #dee2e6;
+      }
+    }
+
+    &.inactive {
+      background: #f8f9fa;
+      color: #adb5bd;
+      cursor: default;
+      opacity: 0.5;
+
+      &:hover {
+        transform: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .day-number {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .description-icon {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      font-size: 16px;
+      opacity: 0.7;
+    }
+
+    &.has-description {
+      border: 2px solid #4CAF50;
+    }
+  }
+}
+
+// Popup Overlay
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  text-align: center;
+  animation: fadeIn 0.3s ease;
 }
 
-.grid div.green { background-color: green; color: white; }
-.grid div.yellow { background-color: yellow; }
-.grid div.red { background-color: red; color: white; }
-.grid div.white { background-color: white; }
+.popup-card {
+  min-width: 400px;
+  max-width: 500px;
+  width: 90%;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1001;
+  margin: 20px;
 
-.grid div.inactive {
-  background-color: #f0f0f0;
-  cursor: default;
+  mat-card-header {
+    background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+    color: white;
+    padding: 20px 24px;
+
+    mat-card-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 20px;
+      color: white;
+
+      mat-icon {
+        color: white;
+      }
+    }
+  }
+
+  mat-card-content {
+    padding: 24px;
+  }
+
+  .popup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .color-field,
+    .description-field {
+      width: 100%;
+    }
+
+    .color-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      mat-icon {
+        font-size: 20px;
+      }
+
+      &.green mat-icon { color: #4CAF50; }
+      &.yellow mat-icon { color: #FFC107; }
+      &.red mat-icon { color: #F44336; }
+      &.white mat-icon { color: #9E9E9E; }
+    }
+  }
+
+  mat-card-actions {
+    padding: 16px 24px 24px;
+    gap: 12px;
+
+    button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
 }
 
-.popup {
-  position: absolute;
-  top: 30%;
-  left: 30%;
-  background: #fff;
-  padding: 1rem;
-  border: 1px solid #000;
-  z-index: 100;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+// Animations
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.popup textarea {
-  width: 11.3rem;
-  height: 6rem;
+@keyframes slideIn {
+  from { 
+    transform: scale(0.9) translateY(-20px);
+    opacity: 0;
+  }
+  to { 
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
 }
 
-#green{
-  background-color: green;
-  color: white;
+// Responsive Design
+@media (max-width: 768px) {
+  .green-cross-container {
+    padding: 16px;
+
+    .calendar-card {
+      mat-card-header {
+        padding: 20px;
+      }
+
+      mat-card-content {
+        padding: 20px;
+      }
+    }
+  }
+
+  .grid {
+    gap: 6px;
+    
+    div {
+      .day-number {
+        font-size: 16px;
+      }
+
+      .description-icon {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .popup-card {
+    min-width: 90vw;
+    max-width: 90vw;
+    margin: 20px;
+  }
 }
 
-#red{
-  background-color: red;
-  color: white;
-}
-
-#yellow{
-  background-color: yellow;
-}
-
-#white{
-  background-color: white;
+@media (max-width: 480px) {
+  .grid {
+    gap: 4px;
+    
+    div {
+      .day-number {
+        font-size: 14px;
+      }
+    }
+  }
 }
 
 

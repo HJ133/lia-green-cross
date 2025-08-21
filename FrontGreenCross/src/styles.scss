@@ -1,1 +1,49 @@
-/* You can add global styles to this file, and also import other style files */
+/* Angular Material Theme */
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+// Define a modern custom theme with Material 3
+$green-cross-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$green-palette,
+    tertiary: mat.$yellow-palette,
+  ),
+  typography: (
+    brand-family: 'Roboto',
+    plain-family: 'Roboto'
+  )
+));
+
+// Apply the theme within html selector as required by Material 3
+html {
+  @include mat.all-component-themes($green-cross-theme);
+}
+
+// Global styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+}

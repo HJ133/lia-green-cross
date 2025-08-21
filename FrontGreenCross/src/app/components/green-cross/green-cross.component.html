@@ -1,29 +1,98 @@
-<div class="grid">
-  <div *ngFor="let day of days; let i = index" #dayDiv [ngClass]="day.status" [class.inactive]="!day.active"
-    (click)="openPopup(day, dayDiv)">
-    {{ day.day || '' }}
+<div class="green-cross-container">
+  <mat-card class="calendar-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon class="calendar-icon">calendar_month</mat-icon>
+        Månadskalender
+      </mat-card-title>
+      <mat-card-subtitle>Klicka på en dag för att ange färg och beskrivning</mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <div class="grid">
+        <div *ngFor="let day of days; let i = index" 
+             #dayDiv 
+             [ngClass]="day.status" 
+             [class.inactive]="!day.active"
+             [class.has-description]="day.description"
+             (click)="openPopup(day, dayDiv)"
+             [matTooltip]="day.description || 'Klicka för att redigera'"
+             matTooltipPosition="above">
+          <span class="day-number">{{ day.day || '' }}</span>
+          <mat-icon *ngIf="day.description" class="description-icon">note</mat-icon>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Modern Popup Dialog -->
+  <div *ngIf="showPopup" 
+       class="popup-overlay" 
+       (click)="closePopup()">
+    <mat-card class="popup-card" 
+              (click)="$event.stopPropagation()">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>edit</mat-icon>
+          Redigera dag {{ selectedDay?.day }}
+        </mat-card-title>
+      </mat-card-header>
+      
+      <mat-card-content>
+        <div class="popup-form">
+          <mat-form-field appearance="outline" class="color-field">
+            <mat-label>Välj färg</mat-label>
+            <mat-select [(ngModel)]="selectedColour">
+              <mat-option value="green">
+                <div class="color-option green">
+                  <mat-icon>circle</mat-icon>
+                  <span>Grön</span>
+                </div>
+              </mat-option>
+              <mat-option value="yellow">
+                <div class="color-option yellow">
+                  <mat-icon>circle</mat-icon>
+                  <span>Gul</span>
+                </div>
+              </mat-option>
+              <mat-option value="red">
+                <div class="color-option red">
+                  <mat-icon>circle</mat-icon>
+                  <span>Röd</span>
+                </div>
+              </mat-option>
+              <mat-option value="white">
+                <div class="color-option white">
+                  <mat-icon>circle</mat-icon>
+                  <span>Standard</span>
+                </div>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="description-field">
+            <mat-label>Beskrivning</mat-label>
+            <textarea matInput 
+                      [(ngModel)]="descriptionText" 
+                      placeholder="Lägg till en beskrivning..."
+                      rows="4"
+                      maxlength="500">
+            </textarea>
+            <mat-hint>{{ descriptionText.length || 0 }}/500</mat-hint>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      
+      <mat-card-actions align="end">
+        <button mat-button (click)="closePopup()" color="primary">
+          <mat-icon>close</mat-icon>
+          Avbryt
+        </button>
+        <button mat-raised-button (click)="saveDay()" color="primary">
+          <mat-icon>save</mat-icon>
+          Spara
+        </button>
+      </mat-card-actions>
+    </mat-card>
   </div>
-</div>
-
-<div *ngIf="showPopup" class="popup" [ngStyle]="{ top: popupTop + 'px', left: popupLeft + 'px' }">
-  <h3>Choose color & description</h3>
-
-  <label>
-    Colour:
-    <select [(ngModel)]="selectedColour"
-      [ngStyle]="{ 'background-color': selectedColour}">
-      <option value="green" id="green">Green</option>
-      <option value="yellow" id="yellow">Yellow</option>
-      <option value="red" id="red">Red</option>
-      <option value="white" id="white">Default</option>
-    </select>
-  </label>
-
-  <label>
-    Description:
-    <textarea [(ngModel)]="descriptionText" placeholder="Description"></textarea>
-  </label>
-
-  <button (click)="saveDay()">Save</button>
-  <button (click)="closePopup()">Cancel</button>
 </div>

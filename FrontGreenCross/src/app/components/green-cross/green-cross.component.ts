@@ -1,6 +1,13 @@
 import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 type DayStatus = 'green' | 'yellow' | 'red' | 'white';
 
@@ -19,7 +26,17 @@ interface ClickEvent {
 
 @Component({
   selector: 'app-green-cross',
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule, 
+    FormsModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatTooltipModule
+  ],
   templateUrl: './green-cross.component.html',
   styleUrls: ['./green-cross.component.scss']
 })
@@ -76,22 +93,14 @@ export class GreenCrossComponent {
     }
   }
 
-    popupTop = 0;
-  popupLeft = 0;
+    openPopup(day: Day, dayDiv: HTMLElement) {
+    if (!day.active || !day.day) return;
 
-  openPopup(day: Day, dayDiv: HTMLElement) {
-  if (!day.active || !day.day) return;
-
-  this.selectedDay = day;
-  this.selectedColour = day.status || 'white';
-  this.descriptionText = day.description || '';
-  this.showPopup = true;
-
-  const rect = dayDiv.getBoundingClientRect();
-
-  this.popupTop = rect.top + window.scrollY;
-  this.popupLeft = rect.right + window.scrollX + 5;
-}
+    this.selectedDay = day;
+    this.selectedColour = day.status || 'white';
+    this.descriptionText = day.description || '';
+    this.showPopup = true;
+  }
 
 
   closePopup() {

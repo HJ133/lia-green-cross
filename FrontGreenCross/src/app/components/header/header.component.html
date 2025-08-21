@@ -1,1 +1,23 @@
-<p>header works!</p>
+<mat-toolbar color="primary" class="modern-header">
+  <div class="header-content">
+    <div class="header-left">
+      <mat-icon class="header-icon">medical_services</mat-icon>
+      <span class="app-title">Green Cross Kalender</span>
+    </div>
+    <div class="header-right">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>info</mat-icon>
+          <span>Om applikationen</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>settings</mat-icon>
+          <span>Inställningar</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</mat-toolbar>
