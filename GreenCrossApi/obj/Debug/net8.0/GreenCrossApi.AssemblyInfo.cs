@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GreenCrossApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d42973055f0c81dac2a5b9007dcc15ccffebcea3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+639766b3e1115849598a10b8c6557a882016cfb9")]
 [assembly: System.Reflection.AssemblyProductAttribute("GreenCrossApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GreenCrossApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
