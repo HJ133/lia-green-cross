@@ -3473,7 +3473,7 @@
       ]
     },
     "System.Memory/4.5.3": {
-      "sha512": "3oDzvc/zzetpTKWMShs1AADwZjQ/36HnsufHRPcOjyRAAMLDlu2iD33MBI2opxnezcVUtXyqDXXjoFMOU9c7SA==",
+      "sha512": "cPzhWlLMdqrLrgXI6J4uOY0dMpA/Y/ZAp91KPldH8seoh9S/0i8qLkAnSQbPkWSN/RaXNPt8dOubT3JhQITh2w==",
       "type": "package",
       "path": "system.memory/4.5.3",
       "files": [
@@ -3689,24 +3689,33 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\hj_ja\\.nuget\\packages\\": {}
+    "C:\\Users\\Richard\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hj_ja\\OneDrive\\Документы\\lia-green-cross\\GreenCrossApi\\GreenCrossApi.csproj",
+      "projectUniqueName": "C:\\Projects\\lia-green-cross\\GreenCrossApi\\GreenCrossApi.csproj",
       "projectName": "GreenCrossApi",
-      "projectPath": "C:\\Users\\hj_ja\\OneDrive\\Документы\\lia-green-cross\\GreenCrossApi\\GreenCrossApi.csproj",
-      "packagesPath": "C:\\Users\\hj_ja\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hj_ja\\OneDrive\\Документы\\lia-green-cross\\GreenCrossApi\\obj\\",
+      "projectPath": "C:\\Projects\\lia-green-cross\\GreenCrossApi\\GreenCrossApi.csproj",
+      "packagesPath": "C:\\Users\\Richard\\.nuget\\packages\\",
+      "outputPath": "C:\\Projects\\lia-green-cross\\GreenCrossApi\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\hj_ja\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Richard\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3724,7 +3733,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -3772,7 +3782,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.413/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

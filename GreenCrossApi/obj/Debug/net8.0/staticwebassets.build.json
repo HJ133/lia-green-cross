@@ -1,11 +1,1 @@
-{
-  "Version": 1,
-  "Hash": "sFB2CI1mJwsXXfn+WHrR7m7eiqj2Sjb09G1FClXs81Q=",
-  "Source": "GreenCrossApi",
-  "BasePath": "_content/GreenCrossApi",
-  "Mode": "Default",
-  "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
-}
+{"Version":1,"Hash":"cYDt3yhvkQvh4q7Y2Wq4y/satYCMiLQH8pvnWZCQiKs=","Source":"GreenCrossApi","BasePath":"_content/GreenCrossApi","Mode":"Default","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
