@@ -51,6 +51,8 @@ interface ColorOption {
 })
 export class GreenCrossComponent {
 
+  popupAnchor: HTMLElement | null = null;
+
   private apiUrl = '/api/clickevents';
 
   days: Day[] = [];
@@ -112,12 +114,14 @@ export class GreenCrossComponent {
     }
   }
 
-    openPopup(day: Day, dayDiv: HTMLElement) {
+  openPopup(day: Day, dayDiv: any) {
     if (!day.active || !day.day) return;
 
     this.selectedDay = day;
     this.selectedColour = day.status || 'white';
     this.descriptionText = day.description || '';
+    // Accept any anchor, cast to HTMLElement or fallback to null
+    this.popupAnchor = (dayDiv instanceof HTMLElement) ? dayDiv : null;
     this.showPopup = true;
   }
 
@@ -173,5 +177,9 @@ export class GreenCrossComponent {
 
   toggleView(): void {
     this.showCalendar = !this.showCalendar;
+  }
+
+  getActiveDayCount(): number {
+    return this.days.filter(d => d.active && d.day).length;
   }
 }

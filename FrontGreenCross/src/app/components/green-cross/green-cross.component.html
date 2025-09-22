@@ -10,7 +10,7 @@
         class="toggle-btn">
         <mat-icon>calendar_month</mat-icon>
         <span>Kalender</span>
-        <span class="badge" *ngIf="days.length > 0">{{ days.filter(d => d.active && d.day).length }}</span>
+        <span class="badge" *ngIf="getActiveDayCount() > 0">{{ getActiveDayCount() }}</span>
       </button>
       
       <button 
@@ -96,7 +96,7 @@
             </div>
             <button mat-icon-button 
                     class="edit-button" 
-                    (click)="openPopup(day, $event.target)"
+                    (click)="openPopup(day, $event.currentTarget)"
                     matTooltip="Redigera">
               <mat-icon>edit</mat-icon>
             </button>
