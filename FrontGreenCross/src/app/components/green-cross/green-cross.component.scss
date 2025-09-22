@@ -2,8 +2,75 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 
-  .calendar-card {
+  .view-toggle-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+    
+    .toggle-buttons {
+      display: flex;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 8px;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      
+      .toggle-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 20px;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        position: relative;
+        font-weight: 500;
+        min-width: 140px;
+        justify-content: center;
+        
+        &:not(.active) {
+          background: transparent;
+          color: #6c757d;
+          
+          &:hover {
+            background: rgba(76, 175, 80, 0.08);
+            color: #4CAF50;
+            transform: translateY(-1px);
+          }
+        }
+        
+        &.active {
+          background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+          color: white;
+          box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+          transform: translateY(-1px);
+        }
+        
+        mat-icon {
+          font-size: 20px;
+        }
+        
+        .badge {
+          background: #ff4444;
+          color: white;
+          font-size: 11px;
+          padding: 2px 6px;
+          border-radius: 10px;
+          min-width: 18px;
+          text-align: center;
+          font-weight: bold;
+          margin-left: 4px;
+          animation: pulse 2s infinite;
+        }
+      }
+    }
+  }
+
+  .calendar-card, .comments-card {
     background: white;
     border-radius: 16px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
@@ -26,7 +93,7 @@
         font-weight: 600;
         color: #2c3e50;
 
-        .calendar-icon {
+        .calendar-icon, .comments-icon {
           color: #4CAF50;
           font-size: 28px;
         }
@@ -142,6 +209,151 @@
   }
 }
 
+// Comments List Styling
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .comment-item {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 16px;
+    border-left: 4px solid #4CAF50;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: #f1f3f4;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .comment-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+
+      .day-badge {
+        min-width: 40px;
+        min-height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        color: white;
+
+        &.green { background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%); }
+        &.yellow { background: linear-gradient(135deg, #FFC107 0%, #FFD54F 100%); color: #333; }
+        &.red { background: linear-gradient(135deg, #F44336 0%, #EF5350 100%); }
+        &.white { background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); color: #333; border: 2px solid #e9ecef; }
+
+        .day-text {
+          font-size: 16px;
+        }
+      }
+
+      .comment-meta {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .comment-date {
+          font-weight: 500;
+          color: #2c3e50;
+        }
+
+        mat-chip {
+          width: fit-content;
+          font-size: 12px;
+
+          &.chip-green {
+            background: rgba(76, 175, 80, 0.1);
+            color: #4CAF50;
+          }
+          &.chip-yellow {
+            background: rgba(255, 193, 7, 0.1);
+            color: #FF8F00;
+          }
+          &.chip-red {
+            background: rgba(244, 67, 54, 0.1);
+            color: #F44336;
+          }
+          &.chip-white {
+            background: rgba(158, 158, 158, 0.1);
+            color: #9E9E9E;
+          }
+
+          mat-icon {
+            font-size: 14px;
+            width: 14px;
+            height: 14px;
+          }
+        }
+      }
+
+      .edit-button {
+        color: #6c757d;
+        transition: all 0.3s ease;
+
+        &:hover {
+          color: #4CAF50;
+          background: rgba(76, 175, 80, 0.1);
+          transform: scale(1.1);
+        }
+
+        mat-icon {
+          font-size: 18px;
+        }
+      }
+    }
+
+    .comment-text {
+      color: #495057;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-left: 52px;
+      padding: 8px 0;
+    }
+  }
+}
+
+// Empty State Styling
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6c757d;
+
+  .empty-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: #dee2e6;
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    margin: 0 0 12px 0;
+    color: #495057;
+    font-weight: 500;
+    font-size: 20px;
+  }
+
+  p {
+    margin: 0 0 24px 0;
+    color: #6c757d;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  button {
+    mat-icon {
+      margin-right: 8px;
+    }
+  }
+
 // Popup Overlay
 .popup-overlay {
   position: fixed;
@@ -194,26 +406,112 @@
   .popup-form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 24px;
 
-    .color-field,
-    .description-field {
-      width: 100%;
-    }
-
-    .color-option {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-
-      mat-icon {
-        font-size: 20px;
+    .color-selection-section {
+      .selection-label {
+        display: block;
+        font-weight: 500;
+        color: #2c3e50;
+        margin-bottom: 12px;
+        font-size: 14px;
       }
 
-      &.green mat-icon { color: #4CAF50; }
-      &.yellow mat-icon { color: #FFC107; }
-      &.red mat-icon { color: #F44336; }
-      &.white mat-icon { color: #9E9E9E; }
+      .color-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+
+        .color-button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          padding: 12px 16px;
+          border: 2px solid transparent;
+          border-radius: 12px;
+          font-size: 14px;
+          font-weight: 500;
+          transition: all 0.3s ease;
+          min-height: 48px;
+
+          &.green {
+            background: linear-gradient(135deg, #E8F5E8 0%, #C8E6C9 100%);
+            color: #2E7D32;
+
+            &:hover {
+              background: linear-gradient(135deg, #C8E6C9 0%, #A5D6A7 100%);
+              transform: translateY(-2px);
+            }
+
+            &.selected {
+              background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+              color: white;
+              border-color: #2E7D32;
+              box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+            }
+          }
+
+          &.yellow {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            color: #F57F17;
+
+            &:hover {
+              background: linear-gradient(135deg, #FFECB3 0%, #FFE082 100%);
+              transform: translateY(-2px);
+            }
+
+            &.selected {
+              background: linear-gradient(135deg, #FFC107 0%, #FFD54F 100%);
+              color: #333;
+              border-color: #F57F17;
+              box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
+            }
+          }
+
+          &.red {
+            background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+            color: #C62828;
+
+            &:hover {
+              background: linear-gradient(135deg, #FFCDD2 0%, #EF9A9A 100%);
+              transform: translateY(-2px);
+            }
+
+            &.selected {
+              background: linear-gradient(135deg, #F44336 0%, #EF5350 100%);
+              color: white;
+              border-color: #C62828;
+              box-shadow: 0 4px 12px rgba(244, 67, 54, 0.4);
+            }
+          }
+
+          &.white {
+            background: linear-gradient(135deg, #FAFAFA 0%, #F5F5F5 100%);
+            color: #616161;
+            border: 1px solid #E0E0E0;
+
+            &:hover {
+              background: linear-gradient(135deg, #F5F5F5 0%, #EEEEEE 100%);
+              transform: translateY(-2px);
+            }
+
+            &.selected {
+              background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+              border-color: #9E9E9E;
+              box-shadow: 0 4px 12px rgba(158, 158, 158, 0.4);
+            }
+          }
+
+          mat-icon {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+
+    .description-field {
+      width: 100%;
     }
   }
 
@@ -280,16 +578,93 @@
     min-width: 90vw;
     max-width: 90vw;
     margin: 20px;
+
+    .popup-form {
+      .color-buttons {
+        grid-template-columns: 1fr;
+        gap: 8px;
+
+        .color-button {
+          min-height: 44px;
+          padding: 10px 14px;
+          font-size: 13px;
+        }
+      }
+    }
+  }
+
+  .comments-card {
+    mat-card-content {
+      padding: 20px;
+    }
+
+    .comment-item {
+      padding: 12px;
+
+      .comment-header {
+        .day-badge {
+          min-width: 36px;
+          min-height: 36px;
+
+          .day-text {
+            font-size: 14px;
+          }
+        }
+      }
+
+      .comment-text {
+        margin-left: 48px;
+        font-size: 13px;
+      }
+    }
   }
 }
 
 @media (max-width: 480px) {
+  .green-cross-container {
+    padding: 16px;
+  }
+
   .grid {
     gap: 4px;
     
     div {
       .day-number {
         font-size: 14px;
+      }
+    }
+  }
+
+  .popup-card {
+    .color-buttons {
+      .color-button {
+        padding: 8px 12px;
+        font-size: 12px;
+        min-height: 40px;
+
+        mat-icon {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  .comments-list {
+    .comment-item {
+      .comment-header {
+        .day-badge {
+          min-width: 32px;
+          min-height: 32px;
+
+          .day-text {
+            font-size: 13px;
+          }
+        }
+      }
+
+      .comment-text {
+        margin-left: 44px;
+        font-size: 12px;
       }
     }
   }

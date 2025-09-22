@@ -1,5 +1,33 @@
 <div class="green-cross-container">
-  <mat-card class="calendar-card">
+  <!-- View Toggle Header -->
+  <div class="view-toggle-container">
+    <div class="toggle-buttons">
+      <button 
+        mat-raised-button 
+        [color]="showCalendar ? 'primary' : ''"
+        (click)="toggleView()"
+        [class.active]="showCalendar"
+        class="toggle-btn">
+        <mat-icon>calendar_month</mat-icon>
+        <span>Kalender</span>
+        <span class="badge" *ngIf="days.length > 0">{{ days.filter(d => d.active && d.day).length }}</span>
+      </button>
+      
+      <button 
+        mat-raised-button 
+        [color]="!showCalendar ? 'primary' : ''"
+        (click)="toggleView()"
+        [class.active]="!showCalendar"
+        class="toggle-btn">
+        <mat-icon>comment</mat-icon>
+        <span>Kommentarer</span>
+        <span class="badge" *ngIf="getActiveDaysWithComments().length > 0">{{ getActiveDaysWithComments().length }}</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Calendar View -->
+  <mat-card class="calendar-card" *ngIf="showCalendar">
     <mat-card-header>
       <mat-card-title>
         <mat-icon class="calendar-icon">calendar_month</mat-icon>
@@ -25,6 +53,60 @@
     </mat-card-content>
   </mat-card>
 
+  <!-- Comments List View -->
+  <mat-card class="comments-card" *ngIf="!showCalendar">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon class="comments-icon">comment</mat-icon>
+        Kommentarer denna månad
+      </mat-card-title>
+      <mat-card-subtitle *ngIf="getActiveDaysWithComments().length === 0">
+        Inga kommentarer har lagts till än
+      </mat-card-subtitle>
+      <mat-card-subtitle *ngIf="getActiveDaysWithComments().length > 0">
+        {{ getActiveDaysWithComments().length }} {{ getActiveDaysWithComments().length === 1 ? 'kommentar' : 'kommentarer' }} registrerade
+      </mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <!-- Empty state -->
+      <div class="empty-state" *ngIf="getActiveDaysWithComments().length === 0">
+        <mat-icon class="empty-icon">comment</mat-icon>
+        <h3>Inga kommentarer än</h3>
+        <p>Växla till kalendervyn för att lägga till kommentarer på dagar.</p>
+        <button mat-raised-button color="primary" (click)="toggleView()">
+          <mat-icon>calendar_month</mat-icon>
+          Gå till kalender
+        </button>
+      </div>
+
+      <!-- Comments list -->
+      <div class="comments-list" *ngIf="getActiveDaysWithComments().length > 0">
+        <div *ngFor="let day of getActiveDaysWithComments()" class="comment-item">
+          <div class="comment-header">
+            <div class="day-badge" [ngClass]="day.status">
+              <span class="day-text">{{ day.day }}</span>
+            </div>
+            <div class="comment-meta">
+              <span class="comment-date">Dag {{ day.day }}</span>
+              <mat-chip [ngClass]="'chip-' + day.status">
+                <mat-icon>circle</mat-icon>
+                {{ getColorDisplayName(day.status) }}
+              </mat-chip>
+            </div>
+            <button mat-icon-button 
+                    class="edit-button" 
+                    (click)="openPopup(day, $event.target)"
+                    matTooltip="Redigera">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </div>
+          <div class="comment-text">{{ day.description }}</div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
   <!-- Modern Popup Dialog -->
   <div *ngIf="showPopup" 
        class="popup-overlay" 
@@ -40,35 +122,20 @@
       
       <mat-card-content>
         <div class="popup-form">
-          <mat-form-field appearance="outline" class="color-field">
-            <mat-label>Välj färg</mat-label>
-            <mat-select [(ngModel)]="selectedColour">
-              <mat-option value="green">
-                <div class="color-option green">
-                  <mat-icon>circle</mat-icon>
-                  <span>Grön</span>
-                </div>
-              </mat-option>
-              <mat-option value="yellow">
-                <div class="color-option yellow">
-                  <mat-icon>circle</mat-icon>
-                  <span>Gul</span>
-                </div>
-              </mat-option>
-              <mat-option value="red">
-                <div class="color-option red">
-                  <mat-icon>circle</mat-icon>
-                  <span>Röd</span>
-                </div>
-              </mat-option>
-              <mat-option value="white">
-                <div class="color-option white">
-                  <mat-icon>circle</mat-icon>
-                  <span>Standard</span>
-                </div>
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <!-- Color Selection Buttons -->
+          <div class="color-selection-section">
+            <label class="selection-label">Välj typ av händelse:</label>
+            <div class="color-buttons">
+              <button 
+                *ngFor="let color of colorOptions" 
+                mat-raised-button 
+                [ngClass]="'color-button ' + color.value + (selectedColour === color.value ? ' selected' : '')"
+                (click)="selectColor(color.value)">
+                <mat-icon>{{ color.icon }}</mat-icon>
+                <span>{{ color.label }}</span>
+              </button>
+            </div>
+          </div>
 
           <mat-form-field appearance="outline" class="description-field">
             <mat-label>Beskrivning</mat-label>

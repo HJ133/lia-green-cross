@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatChipsModule } from '@angular/material/chips';
 
 type DayStatus = 'green' | 'yellow' | 'red' | 'white';
 
@@ -24,6 +25,13 @@ interface ClickEvent {
   description: string;
 }
 
+interface ColorOption {
+  value: DayStatus;
+  label: string;
+  icon: string;
+  description: string;
+}
+
 @Component({
   selector: 'app-green-cross',
   imports: [
@@ -35,7 +43,8 @@ interface ClickEvent {
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatChipsModule
   ],
   templateUrl: './green-cross.component.html',
   styleUrls: ['./green-cross.component.scss']
@@ -45,11 +54,21 @@ export class GreenCrossComponent {
   private apiUrl = '/api/clickevents';
 
   days: Day[] = [];
+  
+  colorOptions: ColorOption[] = [
+    { value: 'green', label: 'Bra dag', icon: 'sentiment_satisfied', description: 'En positiv dag' },
+    { value: 'yellow', label: 'Ok dag', icon: 'sentiment_neutral', description: 'En normal dag' },
+    { value: 'red', label: 'Dålig dag', icon: 'sentiment_dissatisfied', description: 'En utmanande dag' },
+    { value: 'white', label: 'Ingen data', icon: 'radio_button_unchecked', description: 'Ingen information' }
+  ];
 
   showPopup = false;
   selectedDay?: Day;
   descriptionText = '';
   selectedColour: DayStatus | string = 'white';
+  
+  // View toggle
+  showCalendar = true; // true = calendar view, false = comments view
 
   constructor() {
     this.generateCross();
@@ -137,5 +156,22 @@ export class GreenCrossComponent {
     }
 
     this.closePopup();
+  }
+
+  getActiveDaysWithComments(): Day[] {
+    return this.days.filter(day => day.active && day.description && day.description.trim() !== '');
+  }
+
+  getColorDisplayName(status?: DayStatus | string): string {
+    const colorOption = this.colorOptions.find(option => option.value === status);
+    return colorOption ? colorOption.label : 'Standard';
+  }
+
+  selectColor(color: DayStatus): void {
+    this.selectedColour = color;
+  }
+
+  toggleView(): void {
+    this.showCalendar = !this.showCalendar;
   }
 }
